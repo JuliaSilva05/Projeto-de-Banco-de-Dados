@@ -41,7 +41,7 @@ def read_query(connection, query):
 use = "USE webdriver;"
 select_usuario = "SELECT * FROM usuario;"
 select_arquivo = "SELECT * FROM arquivo;"
-connection = create_db_connection("localhost","carlos","1234","webdriver")
+connection = create_db_connection("localhost","root","","webdriver")
 execute_query(connection,use)
 res1 = read_query(connection,select_usuario)
 res2 = read_query(connection,select_arquivo)
