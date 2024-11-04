@@ -5,7 +5,8 @@ CREATE TABLE usuario(
 	id_user INT PRIMARY KEY AUTO_INCREMENT,
     login VARCHAR(10),
     senha VARCHAR(10),
-    email VARCHAR(30)
+    email VARCHAR(30),
+	data_ingresso DATE
 );
 
 CREATE TABLE arquivo(
