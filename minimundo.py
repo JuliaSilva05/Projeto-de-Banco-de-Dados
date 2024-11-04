@@ -39,15 +39,41 @@ def read_query(connection, query):
 
 
 use = "USE webdriver;"
-select_usuario = "SELECT * FROM usuario;"
-select_arquivo = "SELECT * FROM arquivo;"
 connection = create_db_connection("localhost","root","","webdriver")
 execute_query(connection,use)
-res1 = read_query(connection,select_usuario)
-res2 = read_query(connection,select_arquivo)
 
-for i in res1:
-    print(i)
-print("")
-for i in res2:
-    print(i)
+def ants():
+    j = 1
+    print('Reutilizar comandos anteriores')
+    for i in anteriores:
+        print('  ',j,' - ',i)
+        
+        j = j + 1
+    print('   0 - Sair')
+    op = int(input())
+    if op == 0 or op >= j:
+        return
+    else:
+        return anteriores[op-1]
+
+def opcoes():
+    print("1 - Ver comandos anteriores")
+
+opcoes()
+frase = input()
+anteriores = []
+
+while frase != "exit":
+    res = read_query(connection,frase)
+    
+    if (res != None):
+        for i in res:
+            print(i)
+        if frase.casefold() not in (com.casefold() for com in anteriores) and 'select'.casefold() in frase.casefold():
+            anteriores.append(frase)
+        elif 'select'.casefold() not in frase.casefold():
+            execute_query(connection,frase)
+    print("")
+    frase = input()
+    if frase == '1':
+        frase = ants()
