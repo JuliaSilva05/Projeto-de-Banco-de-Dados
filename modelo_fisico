@@ -99,3 +99,10 @@ CREATE TABLE compartilhamento(
     FOREIGN KEY(id_dono) REFERENCES usuario(id_user),
     FOREIGN KEY(id_arq) REFERENCES arquivo(id_arq)
 );
+
+CREATE TABLE atividades_recentes(
+    id_arquivo INT NOT NULL,
+    ultima_versao DATE NOT NULL,
+    acesso BOOLEAN NOT NULL,
+    FOREIGN KEY(id_arquivo) REFERENCES arquivo(id_arq)
+);
