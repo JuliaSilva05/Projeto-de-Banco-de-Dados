@@ -11,10 +11,10 @@ CREATE TABLE usuario(
 
 CREATE TABLE arquivo(
 	id_arq INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(20),
-    tipo VARCHAR(20),
-    perm_acesso VARCHAR(20),
-    tamanho INT,
+    nome VARCHAR(50),
+    tipo VARCHAR(10),
+    perm_acesso VARCHAR(20) CHECK (perm_acesso='Proprietário' OR perm_acesso='Convidado'),
+    tam_bytes INT,
     ultima_mod DATE,
     hora VARCHAR(5),
     localizacao VARCHAR(20),
