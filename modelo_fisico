@@ -26,7 +26,7 @@ CREATE TABLE historico(
 	id_hist INT PRIMARY KEY AUTO_INCREMENT,
     data_ DATE,
     hora VARCHAR(5),
-    operacao VARCHAR(10)  CHECK (tipo='Carregar' OR tipo='Atualizar' OR tipo='Remover'),
+    operacao VARCHAR(10)  CHECK (operacao='Carregar' OR operacao='Atualizar' OR operacao='Remover'),
     cont_mudado TEXT,
     id_arq INT NOT NULL,
     FOREIGN KEY(id_arq) REFERENCES arquivo(id_arq)
