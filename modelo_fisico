@@ -3,9 +3,9 @@ USE webdriver;
 
 CREATE TABLE usuario(
 	id_user INT PRIMARY KEY AUTO_INCREMENT,
-    login VARCHAR(10),
-    senha VARCHAR(10),
-    email VARCHAR(30),
+    	login VARCHAR(10),
+    	senha VARCHAR(10),
+    	email VARCHAR(30),
 	data_ingresso DATE
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE historico(
 	id_hist INT PRIMARY KEY AUTO_INCREMENT,
     data_ DATE,
     hora VARCHAR(5),
-    operacao VARCHAR(20),
+    operacao VARCHAR(10)  CHECK (tipo='Carregar' OR tipo='Atualizar' OR tipo='Remover'),
     cont_mudado TEXT,
     id_arq INT NOT NULL,
     FOREIGN KEY(id_arq) REFERENCES arquivo(id_arq)
