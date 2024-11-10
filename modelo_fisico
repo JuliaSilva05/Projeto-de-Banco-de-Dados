@@ -16,7 +16,7 @@ CREATE TABLE arquivo(
     perm_acesso VARCHAR(20) CHECK (perm_acesso='Proprietário' OR perm_acesso='Convidado'),
     tam_bytes INT,
     ultima_mod DATE,
-    hora VARCHAR(5),
+    hora TIME,
     localizacao VARCHAR(20),
     url VARCHAR(20),
     id_user INT NOT NULL,
@@ -25,8 +25,8 @@ CREATE TABLE arquivo(
 CREATE TABLE historico(
 	id_hist INT PRIMARY KEY AUTO_INCREMENT,
     data_ DATE,
-    hora VARCHAR(5),
-    operacao VARCHAR(10)  CHECK (operacao='Carregar' OR operacao='Atualizar' OR operacao='Remover'),
+    hora TIME,
+    operacao VARCHAR(10) CHECK (operacao='Carregar' OR operacao='Atualizar' OR operacao='Remover'),
     cont_mudado TEXT,
     id_arq INT NOT NULL,
     FOREIGN KEY(id_arq) REFERENCES arquivo(id_arq)
@@ -36,7 +36,7 @@ CREATE TABLE opera(
 	id_op INT PRIMARY KEY NOT NULL auto_increment,
     tipo VARCHAR(10) CHECK (tipo='Carregar' OR tipo='Atualizar' OR tipo='Remover'),
     data_ DATE,
-    hora VARCHAR(5),
+    hora TIME,
 	id_user INT NOT NULL,
     id_arq INT NOT NULL,
     FOREIGN KEY(id_user) REFERENCES usuario(id_user),
@@ -52,7 +52,7 @@ CREATE TABLE suporte(
 	id_sup INT PRIMARY KEY NOT NULL auto_increment,
     descricao VARCHAR(100),
     dia DATE,
-    hora VARCHAR(5),
+    hora TIME,
     id_user INT NOT NULL,
     FOREIGN KEY(id_user) REFERENCES usuario(id_user),
     id_adm INT NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE comentario(
 	id_com INT PRIMARY KEY NOT NULL auto_increment,
     conteudo VARCHAR(300),
     data_ DATE,
-    hora VARCHAR(5)
+    hora TIME
 );
 CREATE TABLE comenta(
 	id_user INT NOT NULL,
