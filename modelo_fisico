@@ -33,7 +33,7 @@ CREATE TABLE historico(
 );
 
 CREATE TABLE opera(
-	id_op INT PRIMARY KEY NOT NULL auto_increment,
+	id_op INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(10) CHECK (tipo='Carregar' OR tipo='Atualizar' OR tipo='Remover'),
     data_ DATE,
     hora TIME,
@@ -44,12 +44,12 @@ CREATE TABLE opera(
 );
 
 CREATE TABLE administrador(
-	id_adm INT PRIMARY KEY NOT NULL auto_increment,
+	id_adm INT PRIMARY AUTO_INCREMENT,
     id_user INT NOT NULL,
     FOREIGN KEY(id_user) REFERENCES usuario(id_user)
 );
 CREATE TABLE suporte(
-	id_sup INT PRIMARY KEY NOT NULL auto_increment,
+	id_sup INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(100),
     dia DATE,
     hora TIME,
@@ -60,14 +60,14 @@ CREATE TABLE suporte(
 );
 
 CREATE TABLE plano(
-	id_plano INT PRIMARY KEY NOT NULL auto_increment,
+	id_plano INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(20),
     duracao INT,
     aquisicao DATE,
-    espaco_user VARCHAR(30)
+    espaco_user VARCHAR(30) NOT NULL
 );
 CREATE TABLE instituicao(
-	id_ins INT PRIMARY KEY NOT NULL auto_increment,
+	id_ins INT PRIMARY KEY auto_increment,
     nome VARCHAR(20),
     causa_social VARCHAR(50),
     endereco VARCHAR(100),
