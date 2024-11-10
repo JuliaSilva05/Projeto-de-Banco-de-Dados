@@ -107,6 +107,35 @@ CREATE TABLE atividades_recentes(
     FOREIGN KEY(id_arquivo) REFERENCES arquivo(id_arq)
 );
 
+
+-- INSERTS
+INSERT INTO usuario(login,senha,email,data_ingresso) VALUES ('Luquinhas14','ben10','lucas@gmail.com','2024-09-29');
+INSERT INTO usuario(login,senha,email,data_ingresso) VALUES ('Amorinha','amora','amora@gmail.com','2024-08-17');
+INSERT INTO usuario(login,senha,email,data_ingresso) VALUES ('Letty','let123','leticia@gmail.com','2023-10-31');
+
+INSERT INTO arquivo(id_arq,nome,tipo,perm_acesso,tam_bytes,ultima_mod,hora,localizacao,url,id_user) VALUES (1,'manuscrito do meu livro','txt','Proprietário',198,'2023-04-12','16:34:21','\wips','url.txt',3);
+INSERT INTO arquivo(id_arq,nome,tipo,perm_acesso,tam_bytes,ultima_mod,hora,localizacao,url,id_user) VALUES (2,'Uma analise detalhada de todos os aliens','pdf','Proprietário',679,20241024,130713,'tarefas','url.pdf',1);
+
+INSERT INTO historico(data_,hora,operacao,cont_mudado,id_arq) VALUES (20241024, 130713,'Atualizar','Como eles estão na última temporada',2);
+
+INSERT INTO opera(tipo,data_,hora,id_user,id_arq) VALUES ('Atualizar',20241024, 130713,1,2);
+
+INSERT INTO administrador(id_user) VALUES (2);
+
+INSERT INTO suporte(descricao,dia,hora,id_user,id_adm) VALUES ('Preciso de ajuda com esse assunto',20240506,182707,3,1);
+
+INSERT INTO plano(nome,duracao,aquisicao,espaco_user) VALUES('Plano de ensino',12,20240708,'Desktop');
+
+INSERT INTO instituicao(nome,causa_social,endereco,id_plano)VALUES('Escola Xique-Xique','Apoio a Educação','Rua Miguel,123',1);
+
+INSERT INTO comentario(conteudo,data_,hora) VALUES ('Uau, que legal!',20241030,180908);
+INSERT INTO comenta(id_user,id_com,id_arq) VALUES (1,1,2);
+
+INSERT INTO compartilhamento(id_destinatario,id_dono,id_arq,data_) VALUES (3,1,2,20241002);
+
+INSERT INTO atividades_recentes(id_arquivo,ultima_versao,acesso) VALUES (2,20241024,'Prioritário');
+
+
 -- PROCEDURES
 
 DELIMITER //
