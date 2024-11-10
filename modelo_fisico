@@ -136,6 +136,10 @@ INSERT INTO compartilhamento(id_destinatario,id_dono,id_arq,data_) VALUES (3,1,2
 INSERT INTO atividades_recentes(id_arquivo,ultima_versao,acesso) VALUES (2,20241024,'Prioritário');
 
 
+-- APLICANDO A FUNCTION
+SELECT arquivo.*,dias(arquivo.ultima_mod) AS '100dias' FROM arquivo;
+
+
 -- PROCEDURES
 
 DELIMITER //
