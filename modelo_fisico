@@ -106,3 +106,43 @@ CREATE TABLE atividades_recentes(
     acesso BOOLEAN NOT NULL,
     FOREIGN KEY(id_arquivo) REFERENCES arquivo(id_arq)
 );
+
+-- PROCEDURES
+
+DELIMITER //
+
+CREATE PROCEDURE Verificar_atividades()
+BEGIN
+    UPDATE atividades_recentes
+    SET ultima_versao = CURDATE();
+END //
+
+CREATE PROCEDURE Conta_usuarios(IN arquivo_id INT)
+BEGIN
+    DECLARE total_usuarios INT;
+
+    SELECT COUNT(DISTINCT id_destinatario) INTO total_usuarios
+    FROM compartilhamento
+    WHERE id_arq = arquivo_id;
+
+    SELECT total_usuarios AS "Total de Usuários com Acesso";
+END //
+
+CREATE PROCEDURE Chavear(IN arquivo_id INT)
+BEGIN
+    UPDATE arquivo
+    SET perm_acesso = CASE
+        WHEN perm_acesso = 'Proprietário' THEN 'Convidado'
+        ELSE 'Proprietário'
+    END
+    WHERE id_arq = arquivo_id;
+END //
+
+CREATE PROCEDURE Remover_acessos(IN arquivo_id INT)
+BEGIN
+    DELETE FROM compartilhamento
+    WHERE id_arq = arquivo_id
+      AND id_destinatario <> (SELECT id_user FROM arquivo WHERE id_arq = arquivo_id);
+END //
+
+DELIMITER ;
