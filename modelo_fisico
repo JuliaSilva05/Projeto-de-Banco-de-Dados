@@ -64,7 +64,7 @@ CREATE TABLE plano(
     nome VARCHAR(20),
     duracao INT,
     aquisicao DATE,
-    espaco_user VARCHAR(30) CONSTRAINT
+    espaco_user VARCHAR(30)
 );
 CREATE TABLE instituicao(
 	id_ins INT PRIMARY KEY NOT NULL auto_increment,
