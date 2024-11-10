@@ -103,7 +103,7 @@ CREATE TABLE compartilhamento(
 CREATE TABLE atividades_recentes(
     id_arquivo INT NOT NULL,
     ultima_versao DATE NOT NULL,
-    acesso BOOLEAN NOT NULL,
+    acesso VARCHAR(20) CHECK (acesso='Prioritário' OR acesso='Não Prioritário'),
     FOREIGN KEY(id_arquivo) REFERENCES arquivo(id_arq)
 );
 
