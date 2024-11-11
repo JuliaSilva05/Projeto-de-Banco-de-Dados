@@ -255,7 +255,7 @@ BEGIN
 END;
 //
 
-CREATE TRIGGER Atualizar_acesso AFTER INSERT ON campartilhamento
+CREATE TRIGGER Atualizar_acesso AFTER INSERT ON compartilhamento
 FOR EACH ROW
 BEGIN
     UPDATE arquivo
