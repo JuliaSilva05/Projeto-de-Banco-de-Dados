@@ -220,3 +220,16 @@ WHERE a.id_user = @id_user OR EXISTS (
 
 -- Administradores
 SELECT * FROM historico;
+
+-- Usuario
+SELECT ar.id_arq, ar.nome, ar.ultima_mod, ar.hora, ar.localizacao, ar.url, ar.tipo, ar.perm_acesso, ar.tam_bytes, ar.id_user, ar.id_user 
+FROM arquivo ar
+JOIN atividades_recentes ar_ativ ON ar.id_arq = ar_ativ.id_arquivo
+WHERE ar.id_user = @id_user OR EXISTS (
+    SELECT 1 FROM compartilhamento c WHERE c.id_arq = ar.id_arq AND c.id_destinatario = @id_user
+);
+
+-- Administradores
+SELECT ar.id_arq, ar.nome, ar.ultima_mod, ar.hora, ar.localizacao, ar.url, ar.tipo, ar.perm_acesso, ar.tam_bytes, ar.id_user, ar.id_user 
+FROM arquivo ar
+JOIN atividades_recentes ar_ativ ON ar.id_arq = ar_ativ.id_arquivo;
