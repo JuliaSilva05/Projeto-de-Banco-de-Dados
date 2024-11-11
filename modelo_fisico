@@ -199,3 +199,13 @@ GRANT PapelUsuario TO 'Luquinhas14'@'localhost';
 GRANT PapelUsuario TO 'Amorinha'@'localhost';
 GRANT PapelAdm TO 'Letty'@'localhost';
 
+-- SELECTS
+
+-- Usuários
+SELECT a.*
+FROM arquivo a
+JOIN compartilhamento c ON a.id_arq = c.id_arq
+WHERE c.id_destinatario = @id_user OR a.id_user = @id_user;
+
+-- Administradores
+SELECT * FROM arquivo;
