@@ -179,3 +179,23 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- ROLES
+CREATE ROLE PapelUsuario;
+GRANT SELECT, INSERT, UPDATE ON webdriver.arquivo TO PapelUsuario;
+
+CREATE ROLE PapelEmpresa;
+GRANT SELECT ON webdriver.usuario TO PapelEmpresa;
+GRANT SELECT ON webdriver.arquivo TO PapelEmpresa;
+
+CREATE ROLE PapelAdm;
+GRANT ALL PRIVILEGES ON webdriver.* TO PapelAdm;
+
+CREATE USER 'Luquinhas14'@'localhost' IDENTIFIED BY 'ben10';
+CREATE USER 'Amorinha'@'localhost' IDENTIFIED BY 'amora';
+CREATE USER 'Letty'@'localhost' IDENTIFIED BY 'let123';
+
+GRANT PapelUsuario TO 'Luquinhas14'@'localhost';
+GRANT PapelUsuario TO 'Amorinha'@'localhost';
+GRANT PapelAdm TO 'Letty'@'localhost';
+
