@@ -233,3 +233,34 @@ WHERE ar.id_user = @id_user OR EXISTS (
 SELECT ar.id_arq, ar.nome, ar.ultima_mod, ar.hora, ar.localizacao, ar.url, ar.tipo, ar.perm_acesso, ar.tam_bytes, ar.id_user, ar.id_user 
 FROM arquivo ar
 JOIN atividades_recentes ar_ativ ON ar.id_arq = ar_ativ.id_arquivo;
+
+-- Triggers
+
+DELIMITER //
+
+CREATE TRIGGER Safe_security BEFORE INSERT ON arquivo
+FOR EACH ROW
+BEGIN
+    IF LOWER(NEW.tipo) = 'exe' THEN
+       SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Proibido a inserção de arquivos executáveis';
+    END IF;
+END;
+//
+
+CREATE TRIGGER Registrar_operacao AFTER INSERT ON opera
+FOR EACH ROW
+BEGIN
+    UPDATE atividades_recentes
+    SET ultima_versao = NEW.data_ WHERE id_arquivo = NEW.id_arq;
+END;
+//
+
+CREATE TRIGGER Atualizar_acesso AFTER INSERT ON campartilhamento
+FOR EACH ROW
+BEGIN
+    UPDATE arquivo
+    SET ultima_mod = NEW.data_ WHERE id_arq = NEW.id_arq;
+END;
+//
+
+DELIMITER ;
