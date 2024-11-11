@@ -209,3 +209,14 @@ WHERE c.id_destinatario = @id_user OR a.id_user = @id_user;
 
 -- Administradores
 SELECT * FROM arquivo;
+
+-- Usuario
+SELECT h.*
+FROM historico h
+JOIN arquivo a ON h.id_arq = a.id_arq
+WHERE a.id_user = @id_user OR EXISTS (
+    SELECT 1 FROM compartilhamento c WHERE c.id_arq = a.id_arq AND c.id_destinatario = @id_user
+);
+
+-- Administradores
+SELECT * FROM historico;
