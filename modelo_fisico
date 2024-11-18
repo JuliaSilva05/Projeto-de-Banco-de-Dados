@@ -199,6 +199,46 @@ GRANT PapelUsuario TO 'Luquinhas14'@'localhost';
 GRANT PapelUsuario TO 'Amorinha'@'localhost';
 GRANT PapelAdm TO 'Letty'@'localhost';
 
+-- VIEWS
+CREATE VIEW VisaoUsuario AS
+SELECT 
+    nome,
+    tipo,
+    perm_acesso,
+    tam_bytes,
+    ultima_mod,
+    hora,
+    localizacao,
+    url
+FROM arquivo
+WHERE id_user = @id_user 
+   OR id_arq IN (SELECT id_arq FROM compartilhamento WHERE id_destinatario = @id_user);
+
+CREATE VIEW VisaoAdm AS
+SELECT 
+    nome,
+    tipo,
+    perm_acesso,
+    tam_bytes,
+    ultima_mod,
+    hora,
+    localizacao,
+    url
+FROM arquivo;
+
+CREATE VIEW HistoricoUsuario AS
+SELECT 
+    data_ AS data,
+    hora,
+    operacao,
+    cont_mudado AS conteudo_alterado
+FROM historico
+WHERE id_arq IN (
+    SELECT id_arq 
+    FROM arquivo 
+    WHERE id_user = @id_user 
+       OR id_arq IN (SELECT id_arq FROM compartilhamento WHERE id_destinatario = @id_user)
+);
 -- SELECTS
 
 -- Usuários
