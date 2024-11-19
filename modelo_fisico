@@ -298,8 +298,9 @@ END;
 CREATE TRIGGER Atualizar_acesso AFTER INSERT ON compartilhamento
 FOR EACH ROW
 BEGIN
-    UPDATE arquivo
-    SET ultima_mod = NEW.data_ WHERE id_arq = NEW.id_arq;
+    INSERT INTO arquivo(nome, tipo, perm_acesso, tam_bytes, ultima_mod, hora, localizacao, url, id_user)
+    SELECT nome, tipo, perm_acesso, tam_bytes, ultima_mod, hora, localizacao, url, NEW.id_destinatario
+    FROM arquivo WHERE id_arq = NEW.id_arq;
 END;
 //
 
